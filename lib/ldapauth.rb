@@ -21,7 +21,7 @@ class LdapAuth
     ).bind_as(
       base: config[:search_base],
       scope: SEARCH_SCOPES[config[:scope]],
-      filter: config[:query_filter].gsub('%u', Net::LDAP::Filter.escape(username)),
+      filter: config[:query_filter].gsub('%u', Net::LDAP::Filter.escape(username != "" ? username : "_invalid_user")),
       password: password,
     )
   end
